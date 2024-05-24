@@ -86,7 +86,7 @@ $con = @mysqli_query($conexao, $consulta) or die($mysql->error);
                                 <td> <?php echo $dado['nome']; ?> </td>
                                 <td> <?php echo $dado['state_id']; ?> </td>
                                 <td> <?php echo $dado['telefone']; ?> </td>
-                                <td> <?php echo $dado['turf_organizacao_empresa']; ?> </td>
+                                <td> <?php echo $dado['turf']; ?> </td>
                                 <td> <?php echo $dado['limite_credito']; ?> </td>
                                 <td> <?php echo $dado['endereco']; ?> </td>
                                 <td class="d-flex">

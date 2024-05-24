@@ -11,7 +11,7 @@ $limite_credito = $_POST['txtlimitecredito'];
 $endereco = $_POST['txtendereco'];
 
 //essa variavél recebe o comando de inserção
-$sqlinsert = "INSERT INTO cliente (id, nome, state_id, telefone, turf_organizacao_empresa, limite_credito, endereco) 
+$sqlinsert = "INSERT INTO cliente (id, nome, state_id, telefone, turf, limite_credito, endereco) 
               VALUES (0, '$nome', '$state_id', '$telefone', '$turf_organizacao_empresa', '$limite_credito', '$endereco')";
 
 //executando instrução no SQL
