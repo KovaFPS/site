@@ -68,10 +68,11 @@ $con = @mysqli_query($conexao, $consulta) or die($mysql->error);
                         <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
                             <th>CÓDIGO</th>
                             <th>NOME</th>
+                            <th>STATE ID</th>
                             <th>TELEFONE</th>
-                            <th>E-MAIL</th>
-                            <th>CPF</th>
-                            <th>RG</th>
+                            <th>TURF/ORGANIZAÇÃO/EMPRESA</th>
+                            <th>LIMITE DE CRÉDITO</th>
+                            <th>ENDEREÇO</th>
                             <th>AÇÃO</th>
                         </tr>
                     </thead>
@@ -83,10 +84,11 @@ $con = @mysqli_query($conexao, $consulta) or die($mysql->error);
                                 <!--ele localiza pela nome da variavél-->
                                 <td> <?php echo $dado['id']; ?> </td>
                                 <td> <?php echo $dado['nome']; ?> </td>
+                                <td> <?php echo $dado['state_id']; ?> </td>
                                 <td> <?php echo $dado['telefone']; ?> </td>
-                                <td> <?php echo $dado['email']; ?> </td>
-                                <td> <?php echo $dado['cpf']; ?> </td>
-                                <td> <?php echo $dado['rg']; ?> </td>
+                                <td> <?php echo $dado['turf_organizacao_empresa']; ?> </td>
+                                <td> <?php echo $dado['limite_credito']; ?> </td>
+                                <td> <?php echo $dado['endereco']; ?> </td>
                                 <td class="d-flex">
                                     <a href="ver_cad_cliente.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-alterar btn-sm m-1" style="background-color: #58AF9C; color:white;  border-radius: 30px;" role="button">
                                         <i class="fas fa-pencil-alt"></i> </a>

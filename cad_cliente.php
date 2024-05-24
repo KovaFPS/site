@@ -15,9 +15,6 @@ verificaUsuario();
     <title>Sistema PHP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-
-
-
 </head>
 
 <body>
@@ -43,118 +40,31 @@ verificaUsuario();
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label for="exampleInputNome">Nome</label>
-                            <input type="text" class="form-control " name="txtnome" id="exampleInputNome" aria-describedby="nome" placeholder="Digite seu nome">
+                            <input type="text" class="form-control " name="txtnome" id="exampleInputNome" aria-describedby="nome" placeholder="Digite o nome">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="exampleInputData_Nasc"> Data de Nascimento </label>
-                            <input type="date" class="form-control " name="txtdata_nascimento" id="exampleInputData_Nasc" aria-describedby="data_nasc">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-
-                            <label for="combo">Sexo</label>
-                            <select class="form-control" name="txtsexo" id="combo">
-                                <option value="Feminino">Feminino</option>
-                                <option value="Maculino">Maculino</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-
-                            <label for="combo">Estado Civil</label>
-                            <select class="form-control" name="txtestado_civil" id="combo">
-                                <option value="Solteiro">Solteiro</option>
-                                <option value="Casado">Casado</option>
-                                <option value="Divorciado">Divorciado</option>
-                                <option value="Viuvo">Viuvo</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputProfissao">Profissão</label>
-                            <input type="text" class="form-control " name="txtprofissao" id="exampleInputProfissao" aria-describedby="nome" placeholder="Digite seu nome">
+                            <label for="exampleInputStateID">State ID</label>
+                            <input type="text" class="form-control " name="txtstate_id" id="exampleInputStateID" aria-describedby="state_id" placeholder="Digite o State ID">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="exampleInputTelefone">Telefone</label>
-                            <input type="text" class="form-control " name="txttelefone" id="exampleInputTelefone" aria-describedby="telefone" placeholder="Digite seu telefone">
+                            <input type="text" class="form-control " name="txttelefone" id="exampleInputTelefone" aria-describedby="telefone" placeholder="Digite o telefone">
                         </div>
-
                         <div class="form-group col-md-6">
-                            <label for="exampleInputEmail">E-mail</label>
-                            <input type="email" class="form-control" name="txtemail" id="exampleInputEmail" aria-describedby="email" placeholder="Digite seu email">
+                            <label for="exampleInputTurfOrganizacaoEmpresa">Turf/Organização/Empresa</label>
+                            <input type="text" class="form-control" name="txtturforganizacaoempresa" id="exampleInputTurfOrganizacaoEmpresa" aria-describedby="turf_organizacao_empresa" placeholder="Digite a Turf/Organização/Empresa">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="exampleInputCPF">CPF</label>
-                            <input type="text" class="form-control" name="txtcpf" id="exampleInputCPF" aria-describedby="cpf" placeholder="Digite seu CPF">
+                            <label for="exampleInputLimiteCredito">Limite de Crédito</label>
+                            <input type="number" step="0.01" class="form-control" name="txtlimitecredito" id="exampleInputLimiteCredito" aria-describedby="limite_credito" placeholder="Digite o Limite de Crédito">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="exampleInputRG">RG</label>
-                            <input type="text" class="form-control" name="txtrg" id="exampleInputRG" aria-describedby="rg" placeholder="Digite seu RG">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-5">
-                            <label for="exampleInputRua">Rua</label>
-                            <input type="text" class="form-control" name="txtrua" id="exampleInputRua" aria-describedby="rua" placeholder="Rua">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="exampleInputNumero">Numero</label>
-                            <input type="text" class="form-control" name="txtnumero" id="exampleInputNumero" aria-describedby="numero" placeholder="Numero">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="exampleInputBairro">Bairro</label>
-                            <input type="text" class="form-control" name="txtbairro" id="exampleInputBairro" aria-describedby="bairro" placeholder="Bairro">
-                        </div>
-                        <div class="form-group col-md-2">
-
-                            <label for="uf">Estado</label>
-                            <select class="form-control" name="txtuf">
-                                <option value="AC">AC</option>
-                                <option value="AL">AL</option>
-                                <option value="AP">AP</option>
-                                <option value="AM">AM</option>
-                                <option value="BA">BA</option>
-                                <option value="CE">CE</option>
-                                <option value="ES">ES</option>
-                                <option value="GO">GO</option>
-                                <option value="MA">MA</option>
-                                <option value="MT">MT</option>
-                                <option value="MS">MS </option>
-                                <option value="MG">MG</option>
-                                <option value="PA">PA</option>
-                                <option value="PB">PB</option>
-                                <option value="PR">PR</option>
-                                <option value="PE">PE</option>
-                                <option value="PI">PI</option>
-                                <option value="RG">RJ</option>
-                                <option value="RN">RN</option>
-                                <option value="RS">RS</option>
-                                <option value="RO">RO</option>
-                                <option value="RR">RR</option>
-                                <option value="SC">SC</option>
-                                <option value="SP">SP</option>
-                                <option value="SE">SE</option>
-                                <option value="TO">TO</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputCep">CEP</label>
-                            <input type="text" class="form-control" name="txtcep" id="exampleInputCEP" aria-describedby="cep" placeholder="Digite seu CEP">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputComplemento">Complemento</label>
-                            <input type="text" class="form-control" name="txtcomplemento" id="exampleInputComplemento" aria-describedby="complemento" placeholder="Complemento">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputNome">Observação</label>
-                            <textarea name="txtobs" cols="30" rows="3" class="form-control" placeholder="Observação"></textarea>
+                            <label for="exampleInputEndereco">Endereço</label>
+                            <input type="text" class="form-control" name="txtendereco" id="exampleInputEndereco" aria-describedby="endereco" placeholder="Digite o Endereço">
                         </div>
                     </div>
                     <div class="text-center">

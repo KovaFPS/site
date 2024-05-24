@@ -27,7 +27,7 @@ verificaUsuario();
     <section class="container-fluid">
         <div class="row mb-5" id="sobre" style="margin-top: 100px;">
             <div class="col-md-12 text-center">
-                <h4> Sistema integrado ao phpMyAdmin </h4>
+                <h4> Sistema de controle </h4>
                 <hr>
                 <p> Modalidades: cadastro, consultas e relatórios.</p>
                 <p> Dentre os recursos oferecidos, é possivél realizar cadastros, editar e excluir informações.

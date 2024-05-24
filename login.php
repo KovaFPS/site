@@ -23,11 +23,11 @@ include("logica-usuario.php");
         <section id="login">
 
             <h1>Acesso ao Sistema</h1>
-            <p> Cadastro, consulta e relatórios</p>
+            <p> Gerenciador de Estoque e Financeiro</p>
 
             <form name="frmlogin" method="post">
 
-                <label for="user"> Usuário </label>
+                <label for="user"> StateID </label>
                 <input type="text" class="form-control" name="usuario" placeholder="Seu usuário">
 
                 <label for="pass" class="mt-3"> Senha </label>

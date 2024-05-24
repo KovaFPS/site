@@ -7,7 +7,7 @@
             <div class="container d-flex justify-content-between">
                 <ul class="navbar-nav d-none d-lg-block" style="color: white;">
                     <li class="nav-item mt-2">
-                        FERNANDA INGRID
+                        La Puerta
                     </li>
                 </ul>
                 <ul class="navbar-nav" id="navegacao">

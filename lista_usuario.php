@@ -68,7 +68,7 @@ $con = @mysqli_query($conexao, $consulta) or die($mysql->error);
                         <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
                             <th>CÓDIGO</th>
                             <th>NOME</th>
-                            <th>E-MAIL</th>
+                            <th>StateID</th>
                             <th>PERFIL</th>
                             <th>AÇÃO</th>
                         </tr>

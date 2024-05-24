@@ -44,14 +44,14 @@ include("logica-usuario.php");
                     <!-- Ele envia os dados para tela de cadastro-->
                     <div class="form-row">
                         <div class="form-group col-md-10">
-                            <label for="exampleInputUsuario">Usuário</label>
-                            <input type="text" class="form-control " name="txtnome" id="exampleInputUsuario" aria-describedby="usuario" placeholder="Digite seu usuário">
+                            <label for="exampleInputUsuario">Nome do Personagem</label>
+                            <input type="text" class="form-control " name="txtnome" id="exampleInputUsuario" aria-describedby="usuario" placeholder="Digite o nome do seu personagem">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-10">
-                            <label for="exampleInputEmail">E-mail</label>
-                            <input type="email" class="form-control" name="txtemail" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Digite seu email">
+                            <label for="exampleInputEmail">StateID</label>
+                            <input type="email" class="form-control" name="txtemail" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Digite seu StateID">
                         </div>
                     </div>
                     <div class="form-row">

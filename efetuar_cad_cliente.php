@@ -4,25 +4,15 @@ include("conexao.php"); //chama o arquivo conexao php
 
 //recebendo os dados
 $nome = $_POST['txtnome'];
-$data_nascimento = $_POST['txtdata_nascimento'];
-$sexo = $_POST['txtsexo'];
-$estado_civil = $_POST['txtestado_civil'];
-$profissao = $_POST['txtprofissao'];
+$state_id = $_POST['txtstate_id'];
 $telefone = $_POST['txttelefone'];
-$email = $_POST['txtemail'];
-$cpf = $_POST['txtcpf'];
-$rg = $_POST['txtrg'];
-$rua = $_POST['txtrua'];
-$numero = $_POST['txtnumero'];
-$bairro = $_POST['txtbairro'];
-$uf = $_POST['txtuf'];
-$cep = $_POST['txtcep'];
-$complemento = $_POST['txtcomplemento'];
-$obs = $_POST['txtobs'];
+$turf_organizacao_empresa = $_POST['txtturforganizacaoempresa'];
+$limite_credito = $_POST['txtlimitecredito'];
+$endereco = $_POST['txtendereco'];
 
 //essa variavél recebe o comando de inserção
-$sqlinsert = "insert into cliente values (0, '$nome', '$data_nascimento', '$sexo', '$estado_civil', '$profissao',
- '$telefone', '$email', '$cpf','$rg', '$rua', '$numero', '$bairro', '$uf','$cep', '$complemento', now(), '$obs')";
+$sqlinsert = "INSERT INTO cliente (id, nome, state_id, telefone, turf_organizacao_empresa, limite_credito, endereco) 
+              VALUES (0, '$nome', '$state_id', '$telefone', '$turf_organizacao_empresa', '$limite_credito', '$endereco')";
 
 //executando instrução no SQL
 //@mysqli_query é um comando que exige dois parametros (conecta ao banco / insere, deleta, consulta e atualiza a informação)
