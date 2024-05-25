@@ -7,14 +7,13 @@ $nome = $_POST['txtnome'];
 $email = $_POST['txtemail'];
 $senha = md5($_POST['txtsenha']);
 $perfil = $_POST['txtperfil'];
+$stateid = $_POST['txtstateid'];
 
 //essa variavél recebe o comando de inserção
-$sqlinsert = "insert into usuario values (0, '$nome', '$email', '$senha', '$perfil')";
+$sqlinsert = "INSERT INTO usuario (nome, email, senha, perfil, stateid) VALUES ('$nome', '$email', '$senha', '$perfil', '$stateid')";
 
 //executando instrução no SQL
-//@mysqli_query é um comando que exige dois parametros (conecta ao banco / insere, deleta, consulta e atualiza a informação)
-$resultado = @mysqli_query($conexao, $sqlinsert);
-
+$resultado = mysqli_query($conexao, $sqlinsert);
 
 ?>
 <!--Fecha o arquivo php, pois está sendo utilizado outras instruções-->
@@ -44,7 +43,7 @@ $resultado = @mysqli_query($conexao, $sqlinsert);
 
         if (!$resultado) {
           //Esse comando só é executado quando não é possivel inserir a informação no banco   
-          die('Query Inválido: ' . @mysqli_error($conexao));
+          die('Query Inválido: ' . mysqli_error($conexao));
         } else {
           include("header.php");
           echo '<div class="alert alert-success" role="alert">

@@ -2,8 +2,8 @@
 
 //FUNCAO PARA EFETUARLOGIN
 
-function efetuaLogin($conexao, $email, $senha){
-    $query = "select * from usuario where email='{$email}' and senha='{$senha}'";
+function efetuaLogin($conexao, $stateid, $senha){
+    $query = "select * from usuario where stateid='{$stateid}' and senha='{$senha}'";
 
     $resultado = mysqli_query($conexao, $query);
 

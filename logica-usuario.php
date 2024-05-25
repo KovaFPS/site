@@ -8,10 +8,8 @@ function usuarioEstaLogado(){
 
 function verificaUsuario(){
     if(!usuarioEstaLogado()){
-
-        //echo "Vc nao esta logado!";
         header("Location:erro.php");
-    die();
+        die();
     }
 }
 
@@ -27,3 +25,4 @@ function logaUsuario($email){
 function logout(){
     session_destroy();
 }
+?>
