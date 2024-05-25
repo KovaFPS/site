@@ -50,8 +50,8 @@ include("logica-usuario.php");
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-10">
-                            <label for="exampleInputEmail">StateID</label>
-                            <input type="email" class="form-control" name="txtemail" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Digite seu StateID">
+                            <label for="exampleInputStateID">StateID (Somente números, 4 dígitos)</label>
+                            <input type="number" class="form-control" name="txtstateid" id="exampleInputStateID" aria-describedby="stateid" placeholder="Digite seu StateID (4 dígitos)">
                         </div>
                     </div>
                     <div class="form-row">

@@ -4,18 +4,22 @@ include("conexao.php"); //chama o arquivo conexao php
 
 //recebendo os dados
 $nome = $_POST['txtnome'];
-$state_id = $_POST['txtstate_id'];
+$state_id = $_POST['txtstateid']; // Alteração para corresponder ao novo campo
 $telefone = $_POST['txttelefone'];
 $turf_organizacao_empresa = $_POST['txtturforganizacaoempresa'];
 $limite_credito = $_POST['txtlimitecredito'];
 $endereco = $_POST['txtendereco'];
+
+// Verifica se o StateID possui exatamente 4 dígitos
+if (strlen($state_id) !== 4 || !ctype_digit($state_id)) {
+    die('StateID inválido. Deve conter exatamente 4 dígitos numéricos.');
+}
 
 //essa variavél recebe o comando de inserção
 $sqlinsert = "INSERT INTO cliente (id, nome, state_id, telefone, turf, limite_credito, endereco) 
               VALUES (0, '$nome', '$state_id', '$telefone', '$turf_organizacao_empresa', '$limite_credito', '$endereco')";
 
 //executando instrução no SQL
-//@mysqli_query é um comando que exige dois parametros (conecta ao banco / insere, deleta, consulta e atualiza a informação)
 $resultado = @mysqli_query($conexao, $sqlinsert);
 
 ?>
