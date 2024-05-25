@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema PHP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -17,28 +16,43 @@
             <div class="col-md-12 text-center" style="margin-top: 100px">
                 <?php
                 include_once('conexao.php');
+                
                 //RECUPERAÇÃO
-                $codigo = $_POST['txtid'];
+                if (isset($_POST['txtid'])) {
+                    $codigo = intval($_POST['txtid']);
 
-                $sqlDelete = "DELETE FROM produto WHERE id = $codigo";
-
-                $resultado = mysqli_query($conexao, $sqlDelete);
-
-                // true = 1
-                // false = 0
-                if ($resultado == true) {
-                    echo '
-                    <div class="alert alert-success" role="alert">
-                         <div class="p-5">
-                            <i class="far fa-grin-beam-sweat h1"></i>          
-                            <p> Registro deletado com sucesso </p>
+                    // Prepare the SQL statement to avoid SQL injection
+                    $stmt = $conexao->prepare("DELETE FROM produto WHERE id = ?");
+                    $stmt->bind_param("i", $codigo);
+                    
+                    // Execute the prepared statement
+                    if ($stmt->execute()) {
+                        echo '
+                        <div class="alert alert-success" role="alert">
+                            <div class="p-5">
+                                <i class="far fa-grin-beam-sweat h1"></i>          
+                                <p> Registro deletado com sucesso </p>
                             </div>
-                    </div>';
-                    // header ("location: lista_produto.php");
-                } else {
-                    die('Query Inválido: ' . @mysqli_error($conexao));
-                }
+                        </div>';
+                    } else {
+                        echo '<div class="alert alert-danger" role="alert">
+                            <div class="p-5">
+                                <i class="far fa-frown h1"></i>          
+                                <p> Erro ao deletar o registro: ' . htmlspecialchars($stmt->error) . '</p>
+                            </div>
+                        </div>';
+                    }
 
+                    // Close the statement
+                    $stmt->close();
+                } else {
+                    echo '<div class="alert alert-danger" role="alert">
+                        <div class="p-5">
+                            <i class="far fa-frown h1"></i>          
+                            <p> ID do produto não fornecido. </p>
+                        </div>
+                    </div>';
+                }
                 ?>
                 <a href="lista_produto.php" class="btn mt-3" style="background-color: #EE82EE; color:white; border-radius: 25px;">Voltar para consulta</a>
             </div>

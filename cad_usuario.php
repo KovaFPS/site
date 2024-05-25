@@ -51,7 +51,7 @@ include("logica-usuario.php");
                     <div class="form-row">
                         <div class="form-group col-md-10">
                             <label for="exampleInputStateID">StateID (Somente números, 4 dígitos)</label>
-                            <input type="number" class="form-control" name="txtstateid" id="exampleInputStateID" aria-describedby="stateid" placeholder="Digite seu StateID (4 dígitos)">
+                            <input type="number" class="form-control" name="txtstateid" id="exampleInputStateID" aria-describedby="stateid" placeholder="Digite seu StateID (4 dígitos)" min="0" max="9999">
                         </div>
                     </div>
                     <div class="form-row">

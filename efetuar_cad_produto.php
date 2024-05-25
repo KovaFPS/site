@@ -3,18 +3,17 @@
 include("conexao.php"); //chama o arquivo conexao php
 
 //recebendo os dados
-$descricao_produto = $_POST['txtdescricao_produto'];
-$marca = $_POST['txtmarca'];
+$nome_produto = $_POST['txtnome_produto'];
 $quantidade = $_POST['txtquantidade'];
-$valor = $_POST['txtvalor'];
-$lote = $_POST['txtlote'];
-$data_validade = $_POST['txtdatavalidade'];
-$codigo_barras = $_POST['txtcodigo_barras'];
-$fornecedor = $_POST['txtfornecedor'];
+$valor_mercado = $_POST['txtvalor_mercado'];
+$valor_custo_medio = $_POST['txtvalor_custo_medio'];
+$onde_pega = $_POST['txtonde_pega'];
+$nome_blueprint = isset($_POST['txtnome_blueprint']) ? $_POST['txtnome_blueprint'] : null;
+$qual_heist = isset($_POST['txtqual_heist']) ? $_POST['txtqual_heist'] : null;
 $imagem = $_POST['txtimagem'];
 
 //essa variavél recebe o comando de inserção
-$sqlinsert = "insert into produto values (0, '$descricao_produto', '$marca', '$quantidade', '$valor', '$lote', '$data_validade', '$codigo_barras', '$fornecedor', '$imagem')";
+$sqlinsert = "INSERT INTO produto (nome_produto, quantidade, valor_mercado, valor_custo_medio, onde_pega, nome_blueprint, qual_heist, imagem) VALUES ('$nome_produto', '$quantidade', '$valor_mercado', '$valor_custo_medio', '$onde_pega', '$nome_blueprint', '$qual_heist', '$imagem')";
 
 //executando instrução no SQL
 //@mysqli_query é um comando que exige dois parametros (conecta ao banco / insere, deleta, consulta e atualiza a informação)

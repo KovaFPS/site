@@ -79,7 +79,7 @@ $con = @mysqli_query($conexao, $consulta) or die($mysql->error);
                             <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
                                 <td> <?php echo $dado['id']; ?> </td>
                                 <td> <?php echo $dado['nome']; ?> </td>
-                                <td> <?php echo $dado['email']; ?> </td>
+                                <td> <?php echo $dado['stateid']; ?> </td>
                                 <td> <?php echo $dado['perfil']; ?> </td>
                                 <td>
                                     <a href="ver_cad_usuario.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-sm btn-alterar m-1" style="background-color: #6495ED; color:white; border-radius: 30px;" role="button">

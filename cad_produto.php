@@ -15,9 +15,6 @@ verificaUsuario();
     <title>Sistema PHP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-
-
-
 </head>
 
 <body>
@@ -44,12 +41,8 @@ verificaUsuario();
                     <!-- 1° linha-->
                     <div class="form-row">
                         <div class="col-md-7 mb-3">
-                            <label for="xampleInputDescricaoProduto"> Descrição do Produto</label>
-                            <input type="text" class="form-control" name="txtdescricao_produto" id="exampleInputDescricaoProduto" aria-describedby="produto" placeholder="Nome do produto">
-                        </div>
-                        <div class="col-md-5 mb-3">
-                            <label for="exampleInputMarca"> Marca </label>
-                            <input type="text" class="form-control" name="txtmarca" id="exampleInputMarca" aria-describedby="marca" placeholder="Digite a marca do produto">
+                            <label for="exampleInputNomeProduto"> Nome do Produto</label>
+                            <input type="text" class="form-control" name="txtnome_produto" id="exampleInputNomeProduto" aria-describedby="produto" placeholder="Nome do produto">
                         </div>
                     </div>
 
@@ -58,76 +51,54 @@ verificaUsuario();
                         <div class="col-md-3 mb-3">
                             <label for="quantidade">Quantidade</label>
                             <select class="form-control" name="txtquantidade" id="quantidade">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
+                                <?php for($i=1; $i<=20; $i++) { echo "<option value=\"$i\">$i</option>"; } ?>
                             </select>
                         </div>
 
                         <div class="col-md-3 mb-3">
-                            <label for="exampleInputValor"> Valor </label>
-                            <input type="text" class="form-control" name="txtvalor" id="exampleInputValor" aria-describedby="preco" placeholder="Digite o Valor">
+                            <label for="exampleInputValorMercado"> Valor de Mercado </label>
+                            <input type="text" class="form-control" name="txtvalor_mercado" id="exampleInputValorMercado" aria-describedby="preco" placeholder="Digite o Valor de Mercado">
                         </div>
 
-                        <div class="col-md-2 mb-3">
-                            <label for="lote">Lote</label>
-                            <select class="form-control" name="txtlote" id="lote">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="exampleInputData_Validade">Data de Validade</label>
-                            <input type="date" class="form-control" name="txtdatavalidade" id="exampleInputData_Validade" aria-describedby="data_validade">
+                        <div class="col-md-3 mb-3">
+                            <label for="exampleInputValorCustoMedio"> Valor de Custo Médio </label>
+                            <input type="text" class="form-control" name="txtvalor_custo_medio" id="exampleInputValorCustoMedio" aria-describedby="custo" placeholder="Digite o Valor de Custo Médio">
                         </div>
                     </div>
 
-                    <!--3° Linha-->
+                    <!-- 3° linha-->
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
-                            <label for="exampleInput_barras"> Código de Barras </label>
-                            <input type="text" class="form-control" name="txtcodigo_barras" id="exampleInputCodigo_barras" aria-describedby="codigo_barras" placeholder="Digite o número do código de barras">
-                        </div>
-                    </div>
-                     <!--4° Linha-->
-                    <div class="form-row">
-                        <div class="col-md-5 mb-3">
-                            <label for="exampleInputFornecedor"> Fornecedor </label>
-                            <select class="form-control" name="txtfornecedor" id="fornecedor">
-                                <option value="1">Atacadão</option>
-                                <option value="2">Extra</option>
-                                <option value="3">Mercado São Roque</option>
-                                <option value="4">Mercado Vargem Grande</option>
-                                <option value="5">Carrefuor</option>
+                            <label for="ondePega">Onde Pega</label>
+                            <select class="form-control" name="txtonde_pega" id="ondePega" onchange="checkOndePega()">
+                                <option value="Farm Sanitation">Farm Sanitation</option>
+                                <option value="Farm Madeira">Farm Madeira</option>
+                                <option value="Farm Prisão">Farm Prisão</option>
+                                <option value="Farm Plantação Weed">Farm Plantação Weed</option>
+                                <option value="Compra">Compra</option>
+                                <option value="Blueprint">Blueprint</option>
+                                <option value="App Drone">App Drone</option>
+                                <option value="Heist's">Heist's</option>
                             </select>
                         </div>
-                        <div class="col-md-7 mb-3">
-                            <label for="exampleInputImagem"> Imagem </label>
+                    </div>
+
+                    <!-- 4° linha-->
+                    <div class="form-row" id="extraFields" style="display: none;">
+                        <div class="col-md-12 mb-3" id="blueprintField" style="display: none;">
+                            <label for="exampleInputNomeBlueprint"> Nome da Blueprint </label>
+                            <input type="text" class="form-control" name="txtnome_blueprint" id="exampleInputNomeBlueprint" placeholder="Digite o nome da Blueprint">
+                        </div>
+                        <div class="col-md-12 mb-3" id="heistField" style="display: none;">
+                            <label for="exampleInputQualHeist"> Qual Heist </label>
+                            <input type="text" class="form-control" name="txtqual_heist" id="exampleInputQualHeist" placeholder="Digite o nome do Heist">
+                        </div>
+                    </div>
+
+                    <!-- 5° linha-->
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="exampleInputImagem"> Foto do Item </label>
                             <input type="file" name="txtimagem" id="exampleInputImagem" aria-describedby="imagem">
                         </div>
                     </div>
@@ -145,7 +116,27 @@ verificaUsuario();
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    <script>
+        function checkOndePega() {
+            const ondePega = document.getElementById('ondePega').value;
+            const extraFields = document.getElementById('extraFields');
+            const blueprintField = document.getElementById('blueprintField');
+            const heistField = document.getElementById('heistField');
+            
+            extraFields.style.display = 'none';
+            blueprintField.style.display = 'none';
+            heistField.style.display = 'none';
 
+            if (ondePega === 'Blueprint') {
+                extraFields.style.display = 'block';
+                blueprintField.style.display = 'block';
+            } else if (ondePega === "Heist's") {
+                extraFields.style.display = 'block';
+                heistField.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 
 </html>
