@@ -1,8 +1,5 @@
 <?php
-
 include("logica-usuario.php");
-
-//VERIFICA SE FOI LOGADO
 verificaUsuario();
 ?>
 <!DOCTYPE html>
@@ -48,19 +45,12 @@ verificaUsuario();
 
                     <!-- 2° linha-->
                     <div class="form-row">
-                        <div class="col-md-3 mb-3">
-                            <label for="quantidade">Quantidade</label>
-                            <select class="form-control" name="txtquantidade" id="quantidade">
-                                <?php for($i=1; $i<=20; $i++) { echo "<option value=\"$i\">$i</option>"; } ?>
-                            </select>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label for="exampleInputValorMercado"> Valor de Mercado </label>
                             <input type="text" class="form-control" name="txtvalor_mercado" id="exampleInputValorMercado" aria-describedby="preco" placeholder="Digite o Valor de Mercado">
                         </div>
 
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label for="exampleInputValorCustoMedio"> Valor de Custo Médio </label>
                             <input type="text" class="form-control" name="txtvalor_custo_medio" id="exampleInputValorCustoMedio" aria-describedby="custo" placeholder="Digite o Valor de Custo Médio">
                         </div>

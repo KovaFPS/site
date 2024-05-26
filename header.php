@@ -37,8 +37,8 @@
                             <a class="dropdown-item" href="lista_usuario.php">Usuário</a>
                             <a class="dropdown-item" href="lista_cliente.php">Cliente</a>
                             <a class="dropdown-item" href="lista_produto.php">Produto</a>
-                            <a class="dropdown-item" href="lista_fornecedor.php">Fornecedor</a>
                             <a class="dropdown-item" href="lista_fornecedor.php">Estoque</a>
+                            <a class="dropdown-item" href="lista_farm.php">Farm</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -49,8 +49,8 @@
                             <a class="dropdown-item" target="_blank" href="relatorio_usuario.php">Usuário</a>
                             <a class="dropdown-item" target="_blank" href="relatorio_cliente.php">Cliente</a>
                             <a class="dropdown-item" target="_blank" href="relatorio_produto.php">Produto</a>
-                            <a class="dropdown-item" target="_blank" href="relatorio_fornecedor.php">Fornecedor</a>
                             <a class="dropdown-item" target="_blank" href="relatorio_fornecedor.php">Produto</a>
+                            <a class="dropdown-item" target="_blank" href="relatorio_farm.php">Farm</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -59,7 +59,6 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdown">
                             <a class="dropdown-item" href="venda_cab_prod.php">Vendas</a>
-                            <a class="dropdown-item" href="venda_cab_entrada.php">Nota Fiscal</a>
                             <a class="dropdown-item" href="cad_farm.php">Farm</a>
                         </div>
                     </li>

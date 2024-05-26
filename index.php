@@ -52,14 +52,14 @@ verificaUsuario();
             <div class="col-md-3 mt-5  mb-5">
                 <div class="card card-body mx-1 h-100 text-center shadow p-5">
                     <i class="fas fa-dolly" style="font-size: 100px; color: #EE82EE;"></i><br>
-                    <h5 style="color: #EE82EE;">PRODUTO</h5>
+                    <h5 style="color: #EE82EE;">VENDAS</h5>
                 </div>
             </div>
             <!--FORNECEDOR-->
             <div class="col-md-3  mt-5  mb-5">
                 <div class="card card-body  mx-1 h-100 text-center shadow p-5">
                     <i class="fas fa-people-carry" style="font-size: 100px; color: #9370DB;"></i><br>
-                    <h5 style="color: #9370DB;">FORNECEDOR</h5>
+                    <h5 style="color: #9370DB;">FARM</h5>
                 </div>
             </div>
         </div>

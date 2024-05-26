@@ -1,29 +1,23 @@
 <?php
-
 include("logica-usuario.php");
 
-//VERIFICA SE FOI LOGADO
+// Verifica se o usuário está logado
 verificaUsuario();
-?>
-<?php
 
+// Inclui o arquivo de conexão com o banco de dados
 include("conexao.php");
+
+// Consulta SQL para selecionar todos os produtos
 $consulta = "SELECT * FROM produto";
 
-//Verifica se o formulário foi submetido
-if (isset($_GET['txtpesquisa'])) {
-    $pesquisa = $_GET['txtpesquisa'];
-    $consulta .= " WHERE descricao_produto LIKE '%$pesquisa%'";
+// Executa a consulta
+$resultado = mysqli_query($conexao, $consulta);
+
+// Verifica se a consulta retornou resultados
+if (!$resultado) {
+    die("Erro ao consultar produtos: " . mysqli_error($conexao));
 }
-
-$consulta .= " ORDER BY descricao_produto";
-
-// echo $consulta;
-$con = @mysqli_query($conexao, $consulta) or die(mysqli_error($conexao));
-// var_dump($con->fetch_array());
-// exit;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +34,8 @@ $con = @mysqli_query($conexao, $consulta) or die(mysqli_error($conexao));
     <?php include("header.php") ?>
     <div class="container-fluid">
         <div class="row m-5">
-
             <div class="col-md-12 mt-4">
-                <!--Inicio dos botões-->
+                <!-- Início dos botões e formulário de pesquisa -->
                 <form method="get" action="lista_produto.php">
                     <div class="d-flex justify-content-between mt-5 mb-2 mr-2">
                         <div>
@@ -60,51 +53,55 @@ $con = @mysqli_query($conexao, $consulta) or die(mysqli_error($conexao));
                             </li>
                         </ul>
                     </div>
-                    <!--Fim dos botões-->
                 </form>
+                <!-- Fim dos botões e formulário de pesquisa -->
 
-                <!--Inicio da Tabela-->
+                <!-- Início da Tabela -->
                 <table class="table table-borderless table-responsive-md table-hover">
                     <thead>
                         <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
                             <th>CÓDIGO</th>
                             <th>DESCRIÇÃO DO PRODUTO</th>
-                            <th>MARCA</th>
-                            <th>QUANTIDADE</th>
-                            <th>DATA DE VALIDADE</th>
+                            <th>VALOR DE MERCADO</th>
+                            <th>CUSTO MÉDIO</th>
+                            <th>ONDE PEGA</th>
+                            <th>BLUEPRINT</th>
+                            <th>HEIST</th>
                             <th>IMAGEM</th>
                             <th>AÇÃO</th>
                         </tr>
                     </thead>
-                    <!--Estrutura de repetição, que vai executar de acordo com a quantidade de registros armazenados no fetch_array-->
-                    <?php while ($dado = $con->fetch_array()) { ?>
-                        <!--Organiza os dados em formato de array-->
-                        <tbody>
-                            <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F" h>
-                                <!--ele localiza pela nome da variavél-->
-                                <td> <?php echo $dado['id']; ?> </td>
-                                <td> <?php echo $dado['descricao_produto']; ?> </td>
-                                <td> <?php echo $dado['marca']; ?> </td>
-                                <td> <?php echo $dado['quantidade']; ?> </td>
-                                <td> <?php echo $dado['data_validade']; ?> </td>
-                                <td> <a> <img src="assets/img/produto/<?php echo $dado['imagem']; ?>" width='50px' heigth='50px'></a> </td>
+                    <tbody>
+                        <?php while ($linha = mysqli_fetch_assoc($resultado)) { ?>
+                            <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
+                                <td><?php echo $linha['id']; ?></td>
+                                <td><?php echo $linha['nome_produto']; ?></td>
+                                <td><?php echo $linha['valor_mercado']; ?></td>
+                                <td><?php echo $linha['valor_custo_medio']; ?></td>
+                                <td><?php echo $linha['onde_pega']; ?></td>
+                                <td><?php echo $linha['nome_blueprint']; ?></td>
+                                <td><?php echo $linha['qual_heist']; ?></td>
+                                <td><img src="assets/img/produto/<?php echo $linha['imagem']; ?>" width="50px" height="50px"></td>
                                 <td class="d-flex">
-                                    <a href="ver_cad_produto.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-alterar btn-sm m-1" style="background-color: #EE82EE; color:white;  border-radius: 30px;" role="button">
+                                    <a href="ver_cad_produto.php?codigo=<?php echo $linha['id']; ?>" class="btn btn-alterar btn-sm m-1" style="background-color: #EE82EE; color:white;  border-radius: 30px;" role="button">
                                         <i class="fas fa-pencil-alt"></i> </a>
-
-                                    <a href="ver_excluir_produto.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-danger btn-sm m-1  btn-excluir" style=" border-radius: 30px;" role="button">
+                                    <a href="ver_excluir_produto.php?codigo=<?php echo $linha['id']; ?>" class="btn btn-danger btn-sm m-1  btn-excluir" style=" border-radius: 30px;" role="button">
                                         <i class="far fa-trash-alt"></i> </a>
-
-                                    <a target="_blank" href="relatorio_produto_individual.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-success btn-sm m-1 btn-excluir" style=" border-radius: 30px;" role="button">
+                                    <a target="_blank" href="relatorio_produto_individual.php?codigo=<?php echo $linha['id']; ?>" class="btn btn-success btn-sm m-1 btn-excluir" style=" border-radius: 30px;" role="button">
                                         <i class="fas fa-print"></i> </a>
                                 </td>
                             </tr>
-                        </tbody>
-                    <?php } ?>
-                    <!--Fim da Tabela-->
+                        <?php } ?>
+                    </tbody>
                 </table>
+                <!-- Fim da Tabela -->
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

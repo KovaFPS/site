@@ -18,7 +18,7 @@ if (!$resultado) {
 } else {
     // Montar a mensagem para o Discord
     $mensagem = "```md\n";
-    $mensagem .= "# Registro de Farm\n\n";
+    $mensagem .= "######  Registro de Farm  ######\n\n";
     $mensagem .= "## Item/Produto:\n";
     // Obter o nome do produto
     $query_produto = "SELECT nome_produto FROM produto WHERE id = '$produto_id'";
@@ -56,15 +56,30 @@ if (!$resultado) {
 
     // Executar a requisição CURL
     $response = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE); // Obter o status HTTP da requisição
     curl_close($ch);
 
-    // Verificar se a requisição foi bem-sucedida
-    if (!$response) {
-        echo "<script>alert('Erro ao enviar mensagem para o Discord');</script>";
-    } else {
-        echo "<script>alert('Registro de farm realizado com sucesso!'); window.location.href='cad_farm.php';</script>";
+    // Mensagem de registro
+    echo "<div class='container'>";
+    echo "<div class='alert alert-success' role='alert'>";
+    echo "<h4 class='alert-heading'>Registro de Farm</h4>";
+    echo "<p>Item/Produto: ";
+    if ($produto) {
+        echo $produto['nome_produto'];
     }
-}
+    echo "</p>";
+    echo "<p>Quantidade: $quantidade</p>";
+    echo "<p>Quem farmou: ";
+    if ($usuario) {
+        echo $usuario['nome'];
+    }
+    echo "</p>";
+    echo "<p>Data e Hora: " . date('d/m/Y H:i:s') . "</p>";
+    echo "</div>";
+    echo "</div>";
 
+    // Redirecionar para cad_farm.php após 3 segundos
+    echo "<meta http-equiv='refresh' content='1;url=cad_farm.php'>";
+}
 mysqli_close($conexao);
 ?>
