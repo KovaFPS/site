@@ -58,8 +58,8 @@
                             MOVIMENTAÇÕES
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdown">
-                            <a class="dropdown-item" href="venda_cab_prod.php">Vendas</a>
                             <a class="dropdown-item" href="cad_farm.php">Farm</a>
+                            <a class="dropdown-item" href="cad_saida_venda.php">Vendas</a>
                         </div>
                     </li>
                     <li class="nav-item px-2">

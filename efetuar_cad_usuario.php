@@ -4,13 +4,12 @@ include("conexao.php"); //chama o arquivo conexao php
 
 //recebendo os dados
 $nome = $_POST['txtnome'];
-$email = $_POST['txtemail'];
 $senha = md5($_POST['txtsenha']);
 $perfil = $_POST['txtperfil'];
 $stateid = $_POST['txtstateid'];
 
 //essa variavél recebe o comando de inserção
-$sqlinsert = "INSERT INTO usuario (nome, email, senha, perfil, stateid) VALUES ('$nome', '$email', '$senha', '$perfil', '$stateid')";
+$sqlinsert = "INSERT INTO usuario (nome, senha, perfil, stateid) VALUES ('$nome', '$senha', '$perfil', '$stateid')";
 
 //executando instrução no SQL
 $resultado = mysqli_query($conexao, $sqlinsert);
