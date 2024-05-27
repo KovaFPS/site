@@ -60,6 +60,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdown">
                             <a class="dropdown-item" href="cad_farm.php">Farm</a>
                             <a class="dropdown-item" href="cad_saida_venda.php">Vendas</a>
+                            <a class="dropdown-item" href="cad_saida_uso.php">Retirada para Uso</a>
                         </div>
                     </li>
                     <li class="nav-item px-2">

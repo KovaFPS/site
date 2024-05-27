@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 27/05/2024 08:52:50
+ Date: 27/05/2024 12:58:35
 */
 
 SET NAMES utf8mb4;
@@ -49,6 +49,21 @@ CREATE TABLE `entrada_compra`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Table structure for entrada_financa
+-- ----------------------------
+DROP TABLE IF EXISTS `entrada_financa`;
+CREATE TABLE `entrada_financa`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `valor` decimal(10, 2) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT current_timestamp,
+  `usuario_id` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_usuario_id`(`usuario_id` ASC) USING BTREE,
+  CONSTRAINT `fk_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for farm
 -- ----------------------------
 DROP TABLE IF EXISTS `farm`;
@@ -63,7 +78,23 @@ CREATE TABLE `farm`  (
   INDEX `farm_ibfk_1`(`usuario_id` ASC) USING BTREE,
   CONSTRAINT `farm_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `farm_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for lavagem_dinheiro
+-- ----------------------------
+DROP TABLE IF EXISTS `lavagem_dinheiro`;
+CREATE TABLE `lavagem_dinheiro`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NULL DEFAULT NULL,
+  `descricao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `valor` decimal(10, 2) NULL DEFAULT NULL,
+  `porcentagem` decimal(5, 2) NULL DEFAULT NULL,
+  `data_transacao` timestamp NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_usuario_lavagem`(`usuario_id` ASC) USING BTREE,
+  CONSTRAINT `fk_usuario_lavagem` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for produto
@@ -83,6 +114,18 @@ CREATE TABLE `produto`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Table structure for saida_financa
+-- ----------------------------
+DROP TABLE IF EXISTS `saida_financa`;
+CREATE TABLE `saida_financa`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `valor` decimal(10, 2) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for saida_uso
 -- ----------------------------
 DROP TABLE IF EXISTS `saida_uso`;
@@ -96,7 +139,7 @@ CREATE TABLE `saida_uso`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `produto_id`(`produto_id` ASC) USING BTREE,
   CONSTRAINT `saida_uso_ibfk_1` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for saida_venda

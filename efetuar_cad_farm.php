@@ -16,6 +16,14 @@ $resultado = mysqli_query($conexao, $sql);
 if (!$resultado) {
     die('Query Inválido: ' . mysqli_error($conexao));
 } else {
+    // Atualizar o estoque na tabela de produtos
+    $sql_atualizar_estoque = "UPDATE produto SET quantidade = quantidade + '$quantidade' WHERE id = '$produto_id'";
+    $resultado_atualizar_estoque = mysqli_query($conexao, $sql_atualizar_estoque);
+
+    if (!$resultado_atualizar_estoque) {
+        die('Erro ao atualizar o estoque: ' . mysqli_error($conexao));
+    }
+
     // Montar a mensagem para o Discord
     $mensagem = "```md\n";
     $mensagem .= "######  Registro de Farm  ######\n\n";
