@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 27/05/2024 07:56:17
+ Date: 27/05/2024 08:52:50
 */
 
 SET NAMES utf8mb4;
@@ -91,6 +91,7 @@ CREATE TABLE `saida_uso`  (
   `produto_id` int NOT NULL,
   `quantidade` int NOT NULL,
   `motivo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `usuario_id` int NOT NULL,
   `data_uso` timestamp NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `produto_id`(`produto_id` ASC) USING BTREE,

@@ -25,4 +25,13 @@ function logaUsuario($email){
 function logout(){
     session_destroy();
 }
+
+function obterIdUsuarioLogado() {
+    if (isset($_SESSION["usuario_logado"]["id"])) {
+        return $_SESSION["usuario_logado"]["id"];
+    } else {
+        return null;
+    }
+}
+
 ?>
