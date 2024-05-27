@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 function usuarioEstaLogado(){
@@ -8,7 +7,7 @@ function usuarioEstaLogado(){
 
 function verificaUsuario(){
     if(!usuarioEstaLogado()){
-        header("Location:erro.php");
+        header("Location: erro.php");
         die();
     }
 }
@@ -17,8 +16,8 @@ function usuarioLogado(){
     return $_SESSION["usuario_logado"];
 }
 
-function logaUsuario($email){
-    $_SESSION["usuario_logado"] = $email;
+function logaUsuario($usuario){
+    $_SESSION["usuario_logado"] = $usuario;
     return $_SESSION["usuario_logado"];
 }
 
@@ -33,5 +32,4 @@ function obterIdUsuarioLogado() {
         return null;
     }
 }
-
 ?>

@@ -11,37 +11,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descricao = $_POST["descricao"];
     $valor = str_replace(['$', ','], '', $_POST["valor"]); // Remover símbolos e vírgulas do valor
     $porcentagem = str_replace('%', '', $_POST["porcentagem"]); // Remover o símbolo de porcentagem
-    $usuario_id = $_SESSION['usuario_id'];
+    $usuario_id = isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : null;
 
     // Verificar se os valores recebidos são numéricos
     if (!is_numeric($valor) || !is_numeric($porcentagem)) {
         $mensagem = "Por favor, insira valores numéricos para o valor e a porcentagem.";
     } else {
-        // Calcular o valor retido para entrada de dinheiro
-        $valorRetido = $valor * ($porcentagem / 100);
-
-        // Valor a ser retido após a lavagem
-        $valorLavado = $valor - $valorRetido;
-
-        $tipo = "Lavagem de dinheiro";
-
-        // Inserir dados na tabela lavagem_dinheiro
-        $sql1 = "INSERT INTO lavagem_dinheiro (usuario_id, descricao, valor, porcentagem) VALUES ('$usuario_id', '$descricao', '$valor', '$porcentagem')";
-        $resultado1 = mysqli_query($conexao, $sql1);
-
-        // Verificar se a inserção na tabela lavagem_dinheiro foi bem-sucedida
-        if ($resultado1) {
-            // Inserir entrada financeira
-            $sql2 = "INSERT INTO entrada_financa (tipo, valor, descricao, usuario_id) VALUES ('$tipo', '$valorRetido', '$descricao', '$usuario_id')";
-            $resultado2 = mysqli_query($conexao, $sql2);
-
-            if ($resultado2) {
-                $mensagem = "Lavagem de dinheiro registrada com sucesso!";
-            } else {
-                $mensagem = "Erro ao registrar entrada financeira: " . mysqli_error($conexao);
-            }
+        // Verificar se a porcentagem está dentro do intervalo correto (0 a 100)
+        if ($porcentagem < 0 || $porcentagem > 100) {
+            $mensagem = "A porcentagem deve estar entre 0 e 100.";
         } else {
-            $mensagem = "Erro ao registrar lavagem de dinheiro: " . mysqli_error($conexao);
+            // Calcular o valor retido para entrada de dinheiro
+            $valorRetido = $valor * ($porcentagem / 100);
+
+            // Valor a ser retido após a lavagem
+            $valorLavado = $valor - $valorRetido;
+
+            $tipo = "Lavagem de dinheiro";
+
+            // Verificar se o ID do usuário está definido e é válido
+            if ($usuario_id !== null) {
+                // Inserir dados na tabela lavagem_dinheiro
+                $sql1 = "INSERT INTO lavagem_dinheiro (usuario_id, descricao, valor, porcentagem) VALUES ('$usuario_id', '$descricao', '$valor', '$porcentagem')";
+                $resultado1 = mysqli_query($conexao, $sql1);
+
+                // Verificar se a inserção na tabela lavagem_dinheiro foi bem-sucedida
+                if ($resultado1) {
+                    // Inserir entrada financeira
+                    $sql2 = "INSERT INTO entrada_financa (tipo, valor, descricao, usuario_id) VALUES ('$tipo', '$valorRetido', '$descricao', '$usuario_id')";
+                    $resultado2 = mysqli_query($conexao, $sql2);
+
+                    if ($resultado2) {
+                        $mensagem = "Lavagem de dinheiro registrada com sucesso!";
+                    } else {
+                        $mensagem = "Erro ao registrar entrada financeira: " . mysqli_error($conexao);
+                    }
+                } else {
+                    $mensagem = "Erro ao registrar lavagem de dinheiro: " . mysqli_error($conexao);
+                }
+            } else {
+                $mensagem = "ID de usuário não definido ou inválido.";
+            }
         }
     }
 
@@ -55,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit; // Parar a execução do script após enviar a resposta JSON
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -91,10 +102,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="form-group col-md-12">
                             <label for="valor">Valor a ser Lavado (em dólar)</label>
                             <div class="input-group">
-                                <div class="input-group-prepend">
+                                <input type="text" class="form-control" id="valor" name="valor" required>
+                                <div class="input-group-append">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input type="text" class="form-control" id="valor" name="valor" required>
                             </div>
                         </div>
                     </div>
@@ -138,44 +149,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-       $(document).ready(function() {
+$(document).ready(function() {
     function calcularValores() {
-        var valor = parseFloat($('#valor').val().replace(/\D/g, ''));
+        var valor = parseFloat($('#valor').val().replace(/[^0-9.]/g, ''));
         var porcentagem = parseFloat($('#porcentagem').val().replace(/\D/g, ''));
 
         var valorRetido = valor * (porcentagem / 100);
         var valorLavado = valor - valorRetido;
 
-        $('#valorLavado').text('$' + formatarNumero(valorLavado));
-        $('#valorRetido').text('$' + formatarNumero(valorRetido));
+        $('#valorLavado').text('$ ' + formatarNumero(valorLavado));
+        $('#valorRetido').text('$ ' + formatarNumero(valorRetido));
         $('#valorLavadoInfo').show();
     }
 
     $('#valor, #porcentagem').on('input', function() {
         calcularValores();
     });
-
     function formatarNumero(numero) {
-        if (!isNaN(numero)) {
-            return numero.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        if (!isNaN(numero) && isFinite(numero)) {
+            return numero.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         } else {
-            return '0';
+            return '0,00';
         }
     }
 
-    $('#valor').on('input', function() {
-        var amount = $(this).val().replace(/\D/g, '');
-        var formattedAmount = '$' + formatarNumero(amount);
-        $(this).val(formattedAmount);
-    });
-
     $('#porcentagem').on('input', function() {
         var value = $(this).val().replace(/\D/g, '');
-        $(this).val(value + '%');
+        $(this).val(value + '');
     });
 
     $('#lavagemForm').submit(function(e) {
         e.preventDefault();
+
+        // Restante do código...
+
+        console.log("Enviando dados para cad_lavagem.php...");
+        console.log("Dados: " + $(this).serialize());
 
         $.ajax({
             type: 'POST',
@@ -183,12 +192,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             data: $(this).serialize(),
             dataType: 'json',
             success: function(response) {
+                console.log("Resposta recebida:");
+                console.log(response);
                 $('#mensagem').text(response.mensagem).removeClass('alert-danger').addClass('alert-success').show();
                 $('#valorLavado').text('$' + formatarNumero(response.valorLavado));
                 $('#valorRetido').text('$' + formatarNumero(response.valorRetido));
                 $('#valorLavadoInfo').show();
             },
-            error: function(response) {
+            error: function(xhr, status, error) {
+                console.log("Erro na requisição AJAX:");
+                console.log(xhr.responseText);
                 $('#mensagem').text('Ocorreu um erro ao registrar a lavagem de dinheiro.').removeClass('alert-success').addClass('alert-danger').show();
             }
         });
