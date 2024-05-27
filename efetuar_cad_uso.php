@@ -1,10 +1,12 @@
 <?php
 include("conexao.php");
+include("logica-usuario.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $produto_id = $_POST['produto_id'];
     $quantidade = $_POST['quantidade'];
     $motivo = $_POST['motivo'];
+    $usuario_id = $_SESSION['usuario_logado']['id'];
 
     // Verificação de estoque
     $sql_estoque = "SELECT quantidade FROM produto WHERE id='$produto_id'";
@@ -16,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_update_estoque = "UPDATE produto SET quantidade='$nova_quantidade' WHERE id='$produto_id'";
         mysqli_query($conexao, $sql_update_estoque);
 
-        $sql = "INSERT INTO saida_uso (produto_id, quantidade, motivo) VALUES ('$produto_id', '$quantidade', '$motivo')";
+        $sql = "INSERT INTO saida_uso (produto_id, quantidade, motivo, usuario_id) VALUES ('$produto_id', '$quantidade', '$motivo', '$usuario_id')";
         if (mysqli_query($conexao, $sql)) {
             echo "Registro de saída por uso realizado com sucesso!";
         } else {
