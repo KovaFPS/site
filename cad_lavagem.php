@@ -125,8 +125,8 @@ $mensagem_discord_lavagem .= "```";
     }
     echo json_encode(array(
         'mensagem' => $mensagem,
-        'valorLavado' => number_format($valorLavado, 2, '', ''),
-        'valorRetido' => number_format($valorRetido, 2, '', '')
+        'valorLavado' => number_format($valorLavado, 2, '.', ''),
+        'valorRetido' => number_format($valorRetido, 2, '.', '')
     ));
 
     exit;
