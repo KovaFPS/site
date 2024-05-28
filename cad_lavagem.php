@@ -36,6 +36,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if ($resultado2) {
                         $mensagem = "Lavagem de dinheiro registrada com sucesso!";
+                        
+                        // Obter o nome do usuário
+                        $query_usuario = "SELECT nome FROM usuario WHERE id = '$usuario_id'";
+                        $resultado_usuario = mysqli_query($conexao, $query_usuario);
+                        $usuario = mysqli_fetch_assoc($resultado_usuario);
+                        $nome_usuario = $usuario ? $usuario['nome'] : 'Nome não encontrado';
+                        
+// Montar a mensagem para o Discord
+$mensagem_discord_lavagem = "```md\n";
+$mensagem_discord_lavagem .= "######  Registro de Lavagem de Dinheiro  ######\n\n";
+$mensagem_discord_lavagem .= "## Descrição:\n";
+$mensagem_discord_lavagem .= "- " . $descricao . "\n";
+$mensagem_discord_lavagem .= "## Valor Lavado:\n";
+$mensagem_discord_lavagem .= "- " . number_format($valor, 0, ',', '.') . " USD\n";
+$mensagem_discord_lavagem .= "## Valor Entregue ao Cliente:\n";
+$mensagem_discord_lavagem .= "- " . number_format($valorLavado, 0, '.', '.') . " USD\n";
+$mensagem_discord_lavagem .= "## Valor Retido:\n";
+$mensagem_discord_lavagem .= "- " . number_format($valorRetido, 0, '.', '.') . " USD\n";
+$mensagem_discord_lavagem .= "## Porcentagem:\n";
+$mensagem_discord_lavagem .= "- " . $porcentagem . "%\n";
+$mensagem_discord_lavagem .= "## Quem Lavou:\n";
+$mensagem_discord_lavagem .= "- " . $nome_usuario . "\n";
+$mensagem_discord_lavagem .= "## Data e Hora:\n";
+$mensagem_discord_lavagem .= "- " . date('d/m/Y H:i:s') . "\n";
+$mensagem_discord_lavagem .= "```";
+
+                        // Webhook do Discord para registro de lavagem de dinheiro
+                        $webhook_url_lavagem = 'https://discord.com/api/webhooks/1244829363816370238/elNW_sUa314durKCI1QXGlA9ldkl-Af_GZ9Gmd44OGSTRNiV2wbGrN1NN7pKZ6ZdhJnB';
+
+                        // Dados do webhook
+                        $data_discord_lavagem = json_encode(['content' => $mensagem_discord_lavagem]);
+
+                        // Configurações da requisição CURL
+                        $ch_lavagem = curl_init($webhook_url_lavagem);
+                        curl_setopt($ch_lavagem, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                        curl_setopt($ch_lavagem, CURLOPT_POST, 1);
+                        curl_setopt($ch_lavagem, CURLOPT_POSTFIELDS, $data_discord_lavagem);
+                        curl_setopt($ch_lavagem, CURLOPT_RETURNTRANSFER, true);
+
+                        // Executar a requisição CURL
+                        $response_lavagem = curl_exec($ch_lavagem);
+                        $http_status_lavagem = curl_getinfo($ch_lavagem, CURLINFO_HTTP_CODE); // Obter o status HTTP da requisição
+                        curl_close($ch_lavagem);
+
+                        // Montar a mensagem para o Discord de entrada de dinheiro
+                        $mensagem_discord_entrada = "```md\n";
+                        $mensagem_discord_entrada .= "######  Registro de Entrada de Dinheiro  ######\n\n";
+                        $mensagem_discord_entrada .= "## Tipo:\n";
+                        $mensagem_discord_entrada .= "- " . $tipo . "\n";
+                        $mensagem_discord_entrada .= "## Descrição:\n";
+                        $mensagem_discord_entrada .= "- " . $descricao . "\n";
+                        $mensagem_discord_entrada .= "## Valor de Lucro:\n";
+                        $mensagem_discord_entrada .= "- " . number_format($valorRetido, 0, '.', '.') . " USD\n";
+                        $mensagem_discord_entrada .= "## Quem deu a entrada:\n";
+                        $mensagem_discord_entrada .= "- " . $nome_usuario . "\n";
+                        $mensagem_discord_entrada .= "## Data e Hora:\n";
+                        $mensagem_discord_entrada .= "- " . date('d/m/Y H:i:s') . "\n";
+                        $mensagem_discord_entrada .= "```";
+
+                        // Webhook do Discord para registro de entrada de dinheiro
+                        $webhook_url_entrada = 'https://discord.com/api/webhooks/1244829573711925301/U4Y-SOK107N8ANfS96VF1qIOkYwWqNCwN_eTZKfcwrBmuHpED4mkOdubfUHWFHxCOHM_';
+
+                        // Dados do webhook
+                        $data_discord_entrada = json_encode(['content' => $mensagem_discord_entrada]);
+
+                        // Configurações da requisição CURL
+                        $ch_entrada = curl_init($webhook_url_entrada);
+                        curl_setopt($ch_entrada, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                        curl_setopt($ch_entrada, CURLOPT_POST, 1);
+                        curl_setopt($ch_entrada, CURLOPT_POSTFIELDS, $data_discord_entrada);
+                        curl_setopt($ch_entrada, CURLOPT_RETURNTRANSFER, true);
+
+                        // Executar a requisição CURL
+                        $response_entrada = curl_exec($ch_entrada);
+                        $http_status_entrada = curl_getinfo($ch_entrada, CURLINFO_HTTP_CODE); // Obter o status HTTP da requisição
+                        curl_close($ch_entrada);
                     } else {
                         $mensagem = "Erro ao registrar entrada financeira.";
                     }
@@ -47,7 +123,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-
     echo json_encode(array(
         'mensagem' => $mensagem,
         'valorLavado' => number_format($valorLavado, 2, '', ''),
@@ -57,6 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
