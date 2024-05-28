@@ -3,6 +3,7 @@
 include("conexao.php");
 include("banco-usuario.php");
 include("logica-usuario.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +50,7 @@ include("logica-usuario.php");
 
                 // 1 PASSO VERIFICAR SE O USUARIO EXISTE
                 if (efetuaLogin($conexao, $usuario, $senha)) {
-                    logaUsuario($usuario);
+                    logaUsuario($conexao, $usuario); // Passando a conexão como parâmetro
                     header("Location: index.php");
                 } else {
                     $usuario = $_POST['usuario'];

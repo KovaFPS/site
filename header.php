@@ -59,7 +59,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdown">
                             <a class="dropdown-item" href="cad_farm.php">Farm</a>
+                            <a class="dropdown-item" href="cad_lavagem.php">Lavagem de Dinheiro</a>
                             <a class="dropdown-item" href="cad_saida_venda.php">Vendas</a>
+                            <a class="dropdown-item" href="cad_saida_financa.php">Compras</a>
                             <a class="dropdown-item" href="cad_saida_uso.php">Retirada para Uso</a>
                         </div>
                     </li>
