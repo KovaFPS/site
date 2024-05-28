@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_query($conexao, $sql_update_estoque);
 
             // Inserir registro de saída por venda
-            $sql_saida_venda = "INSERT INTO saida_venda (cliente_id, produto_id, quantidade, valor_unitario) VALUES ('$cliente_id', '$produto_id', '$quantidade', '$valor_unitario')";
+            $sql_saida_venda = "INSERT INTO saida_venda (cliente_id, produto_id, quantidade, valor_unitario, usuario_id) VALUES ('$cliente_id', '$produto_id', '$quantidade', '$valor_unitario', '$usuario_id')";
             if (mysqli_query($conexao, $sql_saida_venda)) {
                 // Inserir registro na entrada_financa
                 $sql_entrada_financa = "INSERT INTO entrada_financa (tipo, valor, usuario_id, descricao) VALUES ('Venda de Produto/Item', '$valor_total', '$usuario_id', '$descricao_financa')";

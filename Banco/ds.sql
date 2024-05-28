@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 27/05/2024 13:27:19
+ Date: 28/05/2024 12:52:29
 */
 
 SET NAMES utf8mb4;
@@ -56,12 +56,13 @@ CREATE TABLE `entrada_financa`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `tipo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `valor` decimal(10, 2) NOT NULL,
+  `descricao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `data` timestamp NOT NULL DEFAULT current_timestamp,
   `usuario_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_usuario_id`(`usuario_id` ASC) USING BTREE,
   CONSTRAINT `fk_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for farm
@@ -78,7 +79,7 @@ CREATE TABLE `farm`  (
   INDEX `farm_ibfk_1`(`usuario_id` ASC) USING BTREE,
   CONSTRAINT `farm_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `farm_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for lavagem_dinheiro
@@ -94,7 +95,7 @@ CREATE TABLE `lavagem_dinheiro`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_usuario_lavagem`(`usuario_id` ASC) USING BTREE,
   CONSTRAINT `fk_usuario_lavagem` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for produto
@@ -139,7 +140,7 @@ CREATE TABLE `saida_uso`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `produto_id`(`produto_id` ASC) USING BTREE,
   CONSTRAINT `saida_uso_ibfk_1` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for saida_venda
@@ -152,12 +153,15 @@ CREATE TABLE `saida_venda`  (
   `quantidade` int NOT NULL,
   `valor_unitario` decimal(10, 2) NOT NULL,
   `data_venda` timestamp NOT NULL DEFAULT current_timestamp,
+  `usuario_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_saida_venda_cliente_id`(`cliente_id` ASC) USING BTREE,
   INDEX `fk_saida_venda_produto_id`(`produto_id` ASC) USING BTREE,
+  INDEX `fk_saida_venda_usuario_id`(`usuario_id` ASC) USING BTREE,
   CONSTRAINT `fk_saida_venda_cliente_id` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_saida_venda_produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `fk_saida_venda_produto_id` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_saida_venda_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for usuario
