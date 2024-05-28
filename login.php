@@ -3,6 +3,7 @@
 include("conexao.php");
 include("banco-usuario.php");
 include("logica-usuario.php");
+include("log_usuario.php");
 
 ?>
 <!DOCTYPE html>
