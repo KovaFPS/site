@@ -3,19 +3,17 @@ include("logica-usuario.php");
 verificaUsuario();
 include("conexao.php");
 
-// Obter o ID e o nome do usuário logado
-$stateid = usuarioLogado();
-$query = "SELECT id, nome FROM usuario WHERE stateid = '$stateid'";
+// Obter o ID do usuário logado
+$usuario_id = usuarioLogado();
+$query = "SELECT id, nome FROM usuario WHERE id = '$usuario_id'";
 $resultado = mysqli_query($conexao, $query);
 $usuario = mysqli_fetch_assoc($resultado);
 
 // Verificar se o usuário foi encontrado
 if ($usuario) {
-    $usuario_id = $usuario['id'];
     $usuario_nome = $usuario['nome'];
 } else {
     // Se não foi encontrado, definir como vazio ou uma mensagem de erro
-    $usuario_id = '';
     $usuario_nome = 'Nome não encontrado';
 }
 ?>

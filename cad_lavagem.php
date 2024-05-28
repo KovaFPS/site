@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo json_encode(array(
         'mensagem' => $mensagem,
-        'valorLavado' => number_format($valorLavado, 2, '.', ''),
-        'valorRetido' => number_format($valorRetido, 2, '.', '')
+        'valorLavado' => number_format($valorLavado, 2, '', ''),
+        'valorRetido' => number_format($valorRetido, 2, '', '')
     ));
 
     exit;
@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $(document).ready(function() {
             function formatarNumero(numero) {
                 if (!isNaN(numero) && isFinite(numero)) {
-                    return numero.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    return numero.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
                 } else {
                     return '0,00';
                 }
