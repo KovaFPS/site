@@ -7,8 +7,8 @@ verificaUsuario();
 // Inclui o arquivo de conexão com o banco de dados
 include("conexao.php");
 
-// Consulta SQL para selecionar todos os produtos
-$consulta = "SELECT * FROM produto";
+// Consulta SQL para selecionar todos os produtos ordenados por nome_produto
+$consulta = "SELECT * FROM produto ORDER BY nome_produto ASC";
 
 // Executa a consulta
 $resultado = mysqli_query($conexao, $consulta);
@@ -67,6 +67,7 @@ if (!$resultado) {
                             <th>ONDE PEGA</th>
                             <th>BLUEPRINT</th>
                             <th>HEIST</th>
+                            <th>QUANTIDADE</th>
                             <th>IMAGEM</th>
                             <th>AÇÃO</th>
                         </tr>
@@ -81,6 +82,7 @@ if (!$resultado) {
                                 <td><?php echo $linha['onde_pega']; ?></td>
                                 <td><?php echo $linha['nome_blueprint']; ?></td>
                                 <td><?php echo $linha['qual_heist']; ?></td>
+                                <td><?php echo $linha['quantidade']; ?></td>
                                 <td><img src="assets/img/produto/<?php echo $linha['imagem']; ?>" width="50px" height="50px"></td>
                                 <td class="d-flex">
                                     <a href="ver_cad_produto.php?codigo=<?php echo $linha['id']; ?>" class="btn btn-alterar btn-sm m-1" style="background-color: #EE82EE; color:white;  border-radius: 30px;" role="button">

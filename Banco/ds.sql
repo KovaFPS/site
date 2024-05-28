@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 28/05/2024 12:52:29
+ Date: 28/05/2024 15:20:56
 */
 
 SET NAMES utf8mb4;
@@ -59,6 +59,7 @@ CREATE TABLE `entrada_financa`  (
   `descricao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `data` timestamp NOT NULL DEFAULT current_timestamp,
   `usuario_id` int NOT NULL,
+  `referencia` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_usuario_id`(`usuario_id` ASC) USING BTREE,
   CONSTRAINT `fk_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -98,6 +99,21 @@ CREATE TABLE `lavagem_dinheiro`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Table structure for movimentacao_estoque
+-- ----------------------------
+DROP TABLE IF EXISTS `movimentacao_estoque`;
+CREATE TABLE `movimentacao_estoque`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `produto_id` int NOT NULL,
+  `tipo_movimentacao` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `quantidade` int NOT NULL,
+  `data_movimentacao` timestamp NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `produto_id`(`produto_id` ASC) USING BTREE,
+  CONSTRAINT `movimentacao_estoque_ibfk_1` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
 -- Table structure for produto
 -- ----------------------------
 DROP TABLE IF EXISTS `produto`;
@@ -123,6 +139,7 @@ CREATE TABLE `saida_financa`  (
   `tipo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `valor` decimal(10, 2) NOT NULL,
   `data` timestamp NOT NULL DEFAULT current_timestamp,
+  `referencia` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -164,6 +181,17 @@ CREATE TABLE `saida_venda`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Table structure for saldo_caixa
+-- ----------------------------
+DROP TABLE IF EXISTS `saldo_caixa`;
+CREATE TABLE `saldo_caixa`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `saldo_atual` decimal(10, 2) NOT NULL,
+  `ultima_atualizacao` timestamp NOT NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
 -- Table structure for usuario
 -- ----------------------------
 DROP TABLE IF EXISTS `usuario`;
@@ -174,6 +202,28 @@ CREATE TABLE `usuario`  (
   `perfil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `stateid` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Triggers structure for table entrada_financa
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_entrada_financa_insert`;
+delimiter ;;
+CREATE TRIGGER `after_entrada_financa_insert` AFTER INSERT ON `entrada_financa` FOR EACH ROW BEGIN
+  UPDATE `saldo_caixa` SET `saldo_atual` = `saldo_atual` + NEW.`valor`, `ultima_atualizacao` = CURRENT_TIMESTAMP WHERE `id` = 1;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table saida_financa
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_saida_financa_insert`;
+delimiter ;;
+CREATE TRIGGER `after_saida_financa_insert` AFTER INSERT ON `saida_financa` FOR EACH ROW BEGIN
+  UPDATE `saldo_caixa` SET `saldo_atual` = `saldo_atual` - NEW.`valor`, `ultima_atualizacao` = CURRENT_TIMESTAMP WHERE `id` = 1;
+END
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;

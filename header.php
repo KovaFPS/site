@@ -25,7 +25,6 @@
                             <a class="dropdown-item" href="cad_usuario.php">Usuário</a>
                             <a class="dropdown-item" href="cad_cliente.php">Cliente</a>
                             <a class="dropdown-item" href="cad_produto.php">Produto</a>
-                            <a class="dropdown-item" href="cad_fornecedor.php">Fornecedor</a>
 
                         </div>
                     </li>
@@ -46,10 +45,9 @@
                             RELATÓRIO
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdown">
-                            <a class="dropdown-item" target="_blank" href="relatorio_usuario.php">Usuário</a>
+                            <a class="dropdown-item" target="_blank" href="relatorio_usuario.php">Log Usuario</a>
                             <a class="dropdown-item" target="_blank" href="relatorio_cliente.php">Cliente</a>
-                            <a class="dropdown-item" target="_blank" href="relatorio_produto.php">Produto</a>
-                            <a class="dropdown-item" target="_blank" href="relatorio_fornecedor.php">Produto</a>
+                            <a class="dropdown-item" target="_blank" href="relatorio_venda.php">Venda</a>
                             <a class="dropdown-item" target="_blank" href="relatorio_farm.php">Farm</a>
                         </div>
                     </li>
