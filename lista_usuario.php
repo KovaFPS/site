@@ -63,39 +63,44 @@ $con = @mysqli_query($conexao, $consulta) or die($mysql->error);
                 </form>
                 <!--Inicio da Tabela-->
                 <table class="table table-responsive-md table-borderless table-hover">
-                    <thead>
-                        <!--ele localiza pela nome da variavél-->
-                        <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
-                            <th>CÓDIGO</th>
-                            <th>NOME</th>
-                            <th>StateID</th>
-                            <th>PERFIL</th>
-                            <th>AÇÃO</th>
-                        </tr>
-                    </thead>
-
-                    <?php while ($dado = $con->fetch_array()) { ?>
-                        <tbody>
-                            <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
-                                <td> <?php echo $dado['id']; ?> </td>
-                                <td> <?php echo $dado['nome']; ?> </td>
-                                <td> <?php echo $dado['stateid']; ?> </td>
-                                <td> <?php echo $dado['perfil']; ?> </td>
-                                <td>
-                                    <a href="ver_cad_usuario.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-sm btn-alterar m-1" style="background-color: #6495ED; color:white; border-radius: 30px;" role="button">
-                                        <i class="fas fa-pencil-alt"></i> </a>
-
-                                    <a href="ver_excluir_usuario.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-sm btn-danger m-1 btn-excluir" style="border-radius: 30px;" role="button">
-                                        <i class="far fa-trash-alt"></i> </a>
-                                    
-                                    <a target="_blank" href="relatorio_usuario_individual.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-success btn-sm m-1 btn-excluir" style=" border-radius: 30px;" role="button">
-                                        <i class="fas fa-print"></i> </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    <?php } ?>
-                    <!--Fim da Tabela-->
-                </table>
+    <thead>
+        <!-- Cabeçalho da tabela -->
+        <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
+            <th>CÓDIGO</th>
+            <th>NOME</th>
+            <th>StateID</th>
+            <th>TELEFONE</th>
+            <th>NOME NA TURF</th> <!-- Adiciona o cabeçalho para o nome na Turf -->
+            <th>PERFIL</th>
+            <th>AÇÃO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Loop para exibir os dados -->
+        <?php while ($dado = $con->fetch_array()) { ?>
+            <tr style="border-top: 1px solid #C0C0C0; border-bottom: 1px solid #C0C0C0; color: #4F4F4F">
+                <td><?php echo $dado['id']; ?></td>
+                <td><?php echo $dado['nome']; ?></td>
+                <td><?php echo $dado['stateid']; ?></td>
+                <td><?php echo isset($dado['telefone']) ? formatarTelefone($dado['telefone']) : ''; ?></td> <!-- Formata o telefone -->
+                <td><?php echo $dado['nome_turf']; ?></td> <!-- Exibe o nome na Turf -->
+                <td><?php echo $dado['perfil']; ?></td>
+                <td>
+                    <!-- Links para editar, excluir e imprimir -->
+                    <a href="ver_cad_usuario.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-sm btn-alterar m-1" style="background-color: #6495ED; color:white; border-radius: 30px;" role="button">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a href="ver_excluir_usuario.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-sm btn-danger m-1 btn-excluir" style="border-radius: 30px;" role="button">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                    <a target="_blank" href="relatorio_usuario_individual.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-success btn-sm m-1 btn-excluir" style=" border-radius: 30px;" role="button">
+                        <i class="fas fa-print"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 
             </div>
         </div>
@@ -104,6 +109,19 @@ $con = @mysqli_query($conexao, $consulta) or die($mysql->error);
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <?php
+// Função para formatar o telefone
+function formatarTelefone($telefone)
+{
+    // Formata o telefone para o formato (xxx) xxx-xxxx
+    return sprintf(
+        "(%s) %s-%s",
+        substr($telefone, 0, 3),
+        substr($telefone, 3, 3),
+        substr($telefone, 6)
+    );
+}
+?>
 </body>
 
 </html>

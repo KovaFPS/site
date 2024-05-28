@@ -29,13 +29,13 @@ verificaUsuario();
     //EXECUTANDO INSTRUÇÃO
     $resultado = @mysqli_query($conexao, $sqlconsulta);
     if (!$resultado) {
-        echo '<input type="button" onclick="window.location' . "'index.php'" . ';" value="voltar"<br><br>';
+        echo '<input type="button" onclick="window.location' . "'index.php'" . ';" value="voltar"><br><br>';
         die('<b> Query Invalida: </b>' . @mysqli_error($conexao));
     } else {
         $num = @mysqli_num_rows($resultado);
         if ($num == 0) {
             echo "<b>Codigo: </b> Não Localizado!!! <br> <br>";
-            echo '<input type="button" onclick="window.location=' . "'index.php'" . ';" value="voltar"<br><br>';
+            echo '<input type="button" onclick="window.location=' . "'index.php'" . ';" value="voltar"><br><br>';
             exit;
         } else {
             $dado = mysqli_fetch_array($resultado);
@@ -64,29 +64,43 @@ verificaUsuario();
                 <form method="post" action="alteracao_usuario.php" style="margin-left: 90px;">
                     <!-- Ele envia os dados para tela de cadastro-->
                     <div class="form-row">
-                        <div class="form-group col-md-2 mb-3">
+                        <div class="form-group col-md-12">
                             <label for="exampleInputCodigo">Código</label>
                             <input type="text" class="form-control " name="txtid" value='<?php echo $dado['id']; ?>' readonly>
                         </div>
-                        <div class="form-group col-md-8 mb-3">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
                             <label for="exampleInputUsuario">Usuário</label>
                             <input type="text" class="form-control " name="txtnome" value='<?php echo $dado['nome']; ?>'>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-10">
-                            <label for="exampleInputEmail">E-mail</label>
-                            <input type="text" class="form-control" name="txtemail" value='<?php echo $dado['email']; ?>'>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputStateID">StateID</label>
+                            <input type="text" class="form-control" name="txtstateid" id="exampleInputStateID" value='<?php echo $dado['stateid']; ?>' readonly>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputTelefone">Telefone</label>
+                            <input type="text" class="form-control" name="txttelefone" id="exampleInputTelefone" value='<?php echo $dado['telefone']; ?>' readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputNomeTurf">Nome na Turf</label>
+                            <input type="text" class="form-control" name="txtnome_turf" id="exampleInputNomeTurf" value='<?php echo $dado['nome_turf']; ?>' readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
                             <label for="exampleInputPassword">Senha</label>
                             <input type="password" class="form-control" name="txtsenha" value='<?php echo $dado['senha']; ?>'>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-12">
                             <label for="combo">Perfil</label>
                             <input type="text" class="form-control" name="txtperfil" id="combo" value='<?php echo $dado['perfil']; ?>'>
                         </div>
