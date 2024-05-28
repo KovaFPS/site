@@ -4,7 +4,12 @@ include("logica-usuario.php");
 
 verificaUsuario();
 
+// Obter o ID do usuário logado
 $usuario_id = $_POST['usuario_id'];
+if (empty($usuario_id)) {
+    die('ID de usuário inválido');
+}
+
 $produto_id = $_POST['produto_id'];
 $quantidade = $_POST['quantidade'];
 
@@ -16,6 +21,7 @@ $resultado = mysqli_query($conexao, $sql);
 if (!$resultado) {
     die('Query Inválido: ' . mysqli_error($conexao));
 } else {
+
     // Atualizar o estoque na tabela de produtos
     $sql_atualizar_estoque = "UPDATE produto SET quantidade = quantidade + '$quantidade' WHERE id = '$produto_id'";
     $resultado_atualizar_estoque = mysqli_query($conexao, $sql_atualizar_estoque);
