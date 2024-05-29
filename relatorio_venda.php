@@ -145,8 +145,8 @@ mysqli_data_seek($con, 0);
                         <td><?php echo $row['nome_cliente']; ?></td>
                         <td><?php echo $row['nome_produto']; ?></td>
                         <td><?php echo $row['quantidade']; ?></td>
-                        <td><?php echo "$" . number_format($row['valor_unitario'], 2, ',', '.'); ?></td>
-                        <td><?php echo "$" . number_format($row['quantidade'] * $row['valor_unitario'], 2, ',', '.'); ?></td>
+                        <td><?php echo "$" . number_format($row['valor_unitario'], 0, '.', '.'); ?></td>
+                        <td><?php echo "$" . number_format($row['quantidade'] * $row['valor_unitario'], 0, '.', '.'); ?></td>
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -159,11 +159,11 @@ mysqli_data_seek($con, 0);
                 <?php if ($total_registros > 0) { ?>
                 <h3>Resumo:</h3>
                 <p>Total de Registros: <?php echo $total_registros; ?></p>
-                <p>Total de Vendas: <?php echo "$" . number_format($total_vendas, 2, ',', '.'); ?></p>
+                <p>Total de Vendas: <?php echo "$" . number_format($total_vendas, 0, '.', '.'); ?></p>
                 <h3>Quantidade por Produto:</h3>
                 <ul>
                     <?php foreach ($quantidade_por_produto as $produto => $quantidade) { ?>
-                    <li><?php echo "$produto: $quantidade - Total: $" . number_format($total_por_produto[$produto], 2, ',', '.'); ?></li>
+                    <li><?php echo "$produto: $quantidade - Total: $" . number_format($total_por_produto[$produto], 0, '.', '.'); ?></li>
                     <?php } ?>
                 </ul>
                 <?php } ?>
