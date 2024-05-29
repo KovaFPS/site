@@ -24,13 +24,13 @@ include("log_usuario.php");
 
         <section id="login">
 
-            <h1>Acesso ao Sistema</h1>
-            <p> Gerenciador de Estoque e Financeiro</p>
+            <h1>Acesso ao Sistema da SeaSide</h1>
+            <p> Gerenciador ERP da Organização</p>
 
             <form name="frmlogin" method="post">
 
                 <label for="user"> StateID </label>
-                <input type="text" class="form-control" name="usuario" placeholder="Seu usuário">
+                <input type="text" class="form-control" name="usuario" placeholder="Seu StateID">
 
                 <label for="pass" class="mt-3"> Senha </label>
                 <input type="password" class="form-control" name="senha" placeholder="Sua senha">
