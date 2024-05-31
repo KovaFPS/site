@@ -74,5 +74,3 @@ if (!function_exists('registraLog')) {
 }
 
 ?>
-
-

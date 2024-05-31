@@ -4,7 +4,7 @@ include("conexao.php"); // Inclui o arquivo de conexão
 
 // Recebendo os dados do formulário
 $nome = $_POST['txtnome'];
-$senha = $_POST['txtsenha'];
+$senha = md5($_POST['txtsenha']); // Criptografando a senha usando md5
 $perfil = $_POST['txtperfil'];
 $stateid = $_POST['txtstateid'];
 $telefone = $_POST['txttelefone']; // Correção aqui
